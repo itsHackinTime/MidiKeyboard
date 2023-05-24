@@ -3,15 +3,19 @@ const app = express();
 const path = require('path');
 const port = 3000;
 const  spotify  = require('./routers/spotify.js');
+
 // Define your routes and middleware here
 
 // Example route
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
+app.get('/api', spotify.search, spotify.findRelatedArtists, (req, res) => {
+  console.log(res.locals.artistsObj.artists);
+  // ! make sure to return your responses
+  res.status(200).json(res.locals.related);
 });
-app.post('/', spotify.fetchToken, spotify.radiohead, (req, res) => {
-  console.log(res.locals.rh)
-  res.status(200).json(res.locals.rh);
+
+app.post('/api', spotify.fetchToken, async (req, res) => {
+  // console.log(res.locals.rh);
+  res.status(200).json(res.locals.token);
   });
 
 // Start the server
