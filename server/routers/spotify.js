@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+require('dotenv').config()
 
 // credentials for spotify please hack my app...actually pls dont
 
 const creds = {
   grant_type: 'client_credentials',
-  client_id: 'baf9163f11444b65884719488960d9f6',
-  client_secret:'5488770bbdea4679af5016512b5b939f'
+  client_id: process.env.client_id,
+  client_secret: process.env.client_secret
 }
 let token;
 
@@ -23,9 +24,9 @@ let token;
       },
       body: params 
     });
-    res.locals.token = await response.json();
-    token = res.locals.token.access_token;
-    // console.log(token)
+    console.log
+    const test = await response.json();
+    process.env.token = test.access_token;
     return next();
   } catch (error) {
       return next(error);
@@ -36,7 +37,7 @@ router.radiohead = async function (req, res, next) {
   try {
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${process.env.token}`
       },
     });
     res.locals.rh = await response.json();
@@ -47,26 +48,28 @@ router.radiohead = async function (req, res, next) {
 }
 router.search = async function (req, res, next) {
   const url = 'https://api.spotify.com/v1/search?q=mastodon&type=artist';
-  console.log(token);
+  // console.log(process.env.token);
   try {
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${process.env.token}`
       }
     });
     res.locals.artistsObj = await response.json();
+    process.env.artist = res.locals.artistsObj.artists.items[0].id
+    console.log(process.env.artist)
     return next();
   }catch(error) {
     next(error);
   }
 }
 router.findRelatedArtists = async function (req, res, next) {
-  //  console.log(res.locals.artistsObj.artists.items[0].id)
-  const url = `https://api.spotify.com/v1/artists/${res.locals.artistsObj.artists.items[0].id}/related-artists`;
+    // console.log(res.locals.artistsObj)
+  const url = `https://api.spotify.com/v1/artists/${process.env.artist}/related-artists`;
   try {
     const response = await fetch(url,{
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${process.env.token}`
       }
     });
     res.locals.related =  await response.json()

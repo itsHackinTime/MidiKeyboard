@@ -1,8 +1,4 @@
-#root{
-  h1{
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: center;
-  }
-}
+@import './fonts.scss';
+@import './colors.scss';
+@import './navbar.scss';
+@import 'tree.scss';
