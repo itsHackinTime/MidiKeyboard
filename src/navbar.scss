@@ -1,0 +1,56 @@
+#root{
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  font-family: 'Roboto';
+}
+  #navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: $base-color;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    #logo-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      min-width: 200px;
+      .logo {
+        height: 40px;
+      }
+      h1 {
+        font-family: 'Press Start 2P';
+      }
+    }
+    #search-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+      align-self: center;
+      #search {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    #pf-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      min-width: 200px;
+      .pfp {
+        height: 40px;
+        width: 40px;
+        border-radius: 10%;
+      }
+    }
+  }
+
+
+body {
+  margin: 0;
+  background-color: $background;
+}
