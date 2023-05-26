@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 require('dotenv').config()
 
 // credentials for spotify please hack my app...actually pls dont
@@ -47,6 +46,7 @@ router.radiohead = async function (req, res, next) {
   }
 }
 router.search = async function (req, res, next) {
+  console.log(req.body);
   const url = 'https://api.spotify.com/v1/search?q=mastodon&type=artist';
   // console.log(process.env.token);
   try {
